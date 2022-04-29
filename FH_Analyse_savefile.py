@@ -9,7 +9,7 @@ plt.rcParams['figure.figsize'] = [12, 8] # bigger default figures
 
 
 # select the file to load
-savefile = '..\datasets\mindaffectBCI*.txt' # use the most recent file in datasets directory
+savefile = 'datasets\mindaffectBCI*.txt' # use the most recent file in datasets directory
 
 X, Y, coords = load_mindaffectBCI(savefile, stopband=None, fs_out=None)
 # output is: X=eeg, Y=stimulus, coords=meta-info about dimensions of X and Y
