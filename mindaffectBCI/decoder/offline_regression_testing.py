@@ -213,7 +213,7 @@ if __name__=="__main__":
 
     with open('metrics.txt', 'w') as f:
         if not res:
-            f.write(res)
+            f.write(res[1])
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
@@ -234,7 +234,7 @@ if __name__=="__main__":
 
     with open('metrics.txt', 'w') as f:
         if not res:
-            f.write(res)
+            f.write(res[1])
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
@@ -254,7 +254,7 @@ if __name__=="__main__":
 
     with open('metrics.txt', 'w') as f:
         if not res:
-            f.write(res)        
+            f.write(res[1])
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
