@@ -203,7 +203,7 @@ def regression_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, 
 if __name__=="__main__":
     print('------------------\n\n P L O S    O N E\n\n---------------------')
     dataset, dataset_args, loader_args, pipeline, cv = setup_plos_one()
-    regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
+    res = regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
     print('BASELINE: 336f594\n Ave-DC\n\
             IntLen   100   201   277   378   478   554   655   756\n\
               Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
@@ -211,10 +211,19 @@ if __name__=="__main__":
            StopErr  0.94  0.94  0.78  0.53  0.44  0.42  0.41  0.41   AUSC 63.1\n\
      StopThresh(P)  0.79  0.79  0.62  0.44  0.38  0.38  0.39  0.39   SSAE 15.6')
 
+    with open('metrics.txt', 'w') as f:
+        f.write(res)
+        f.write('BASELINE: 336f594\n Ave-DC\n\
+                IntLen   100   201   277   378   478   554   655   756\n\
+                Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
+            Perr(est)  0.57  0.39  0.31  0.26  0.21  0.19  0.17  0.16   PSAE 10.6\n\
+            StopErr  0.94  0.94  0.78  0.53  0.44  0.42  0.41  0.41   AUSC 63.1\n\
+        StopThresh(P)  0.79  0.79  0.62  0.44  0.38  0.38  0.39  0.39   SSAE 15.6')
+
 
     print('------------------\n\n L O W L A N D S\n\n---------------------')
     dataset, dataset_args,loader_args,pipeline,cv = setup_lowlands()
-    regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
+    res = regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
     print("BASELINE: 336f594\n Ave-DC\n\
             IntLen    54   109   150   205   260   301   356   411\n\
               Perr  0.79  0.62  0.52  0.46  0.41  0.39  0.36  0.36   AUDC 51.9\n\
@@ -222,12 +231,30 @@ if __name__=="__main__":
            StopErr  0.98  0.98  0.98  0.98  0.79  0.72  0.69  0.69   AUSC 86.4\n\
      StopThresh(P)  0.89  0.89  0.89  0.89  0.63  0.59  0.60  0.61   SSAE 14.7")
 
+    with open('metrics.txt', 'w') as f:
+        f.write(res)
+        f.write('BASELINE: 336f594\n Ave-DC\n\
+                IntLen   100   201   277   378   478   554   655   756\n\
+                Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
+            Perr(est)  0.57  0.39  0.31  0.26  0.21  0.19  0.17  0.16   PSAE 10.6\n\
+            StopErr  0.94  0.94  0.78  0.53  0.44  0.42  0.41  0.41   AUSC 63.1\n\
+        StopThresh(P)  0.79  0.79  0.62  0.44  0.38  0.38  0.39  0.39   SSAE 15.6')
+
     print('------------------\n\n M I N D A F F E C T\n\n---------------------')
     dataset, dataset_args,loader_args,pipeline,cv = setup_mindaffectBCI()
-    regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
+    res = regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
     print("BASELINE: 336f594\n AVE-Dn\n\
                     IntLen   134   270   371   507   642   743   878  1014\n\
               Perr  0.94  0.76  0.56  0.36  0.27  0.25  0.23  0.23   AUDC 48.5\n\
          Perr(est)  0.92  0.58  0.37  0.27  0.22  0.21  0.19  0.19   PSAE 24.7\n\
            StopErr  0.96  0.93  0.89  0.81  0.69  0.60  0.56  0.56   AUSC 77.0\n\
      StopThresh(P)  0.86  0.82  0.77  0.63  0.49  0.44  0.44  0.44   SSAE 23.9")
+
+    with open('metrics.txt', 'w') as f:
+        f.write(res)
+        f.write('BASELINE: 336f594\n Ave-DC\n\
+                IntLen   100   201   277   378   478   554   655   756\n\
+                Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
+            Perr(est)  0.57  0.39  0.31  0.26  0.21  0.19  0.17  0.16   PSAE 10.6\n\
+            StopErr  0.94  0.94  0.78  0.53  0.44  0.42  0.41  0.41   AUSC 63.1\n\
+        StopThresh(P)  0.79  0.79  0.62  0.44  0.38  0.38  0.39  0.39   SSAE 15.6')
