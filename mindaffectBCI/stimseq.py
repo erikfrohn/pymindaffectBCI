@@ -43,11 +43,19 @@ class StimSeq :
 
         Args:
             st ([type], optional): [description]. Defaults to None.
+<<<<<<< HEAD
             ss ([type], optional): [ nEvent x nSymb ] stimulus code. Defaults to None.
             es ([type], optional): [description]. Defaults to None.
         """        
 
         self.stimSeq     = ss if not isinstance(ss,np.ndarray) else ss.tolist()
+=======
+            ss ([type], optional): [description]. Defaults to None.
+            es ([type], optional): [description]. Defaults to None.
+        """        
+
+        self.stimSeq     = ss
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         self.stimTime_ms = st
         self.eventSeq    = es
 
@@ -79,6 +87,7 @@ class StimSeq :
         res+="\n\n"
         return res
 
+<<<<<<< HEAD
     def plot(self,show=False,title=None):
         import matplotlib.pyplot as plt
         import numpy as np
@@ -99,11 +108,15 @@ class StimSeq :
         return all([ isinstance(s,int) or s.is_integer() for row in self.stimSeq for s in row ])
 
     def convertstimSeq2int(self,scale=1,force=False,minval=None,maxval=None):
+=======
+    def convertstimSeq2int(self,scale=1):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         """[summary]
 
         Args:
             scale (int, optional): [description]. Defaults to 1.
         """        
+<<<<<<< HEAD
         if force or self.is_integer():
             self.stimSeq = self.float2int(self.stimSeq)
 
@@ -115,13 +128,21 @@ class StimSeq :
         """        
         if force or self.is_integer():
             self.stimSeq = self.int2float(self.stimSeq,scale,minval,maxval)
+=======
+
+        self.stimSeq = self.float2int(self.stimSeq)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
     @staticmethod
     def float2int(stimSeq,scale=1,minval=None,maxval=None):
         """convert float list of lists to integer
 
         Args:
+<<<<<<< HEAD
             stimSeq ([type]): [ nEvent x nSymb ] stimulus code
+=======
+            stimSeq ([type]): [description]
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
             scale (int, optional): [description]. Defaults to 1.
             minval ([type], optional): [description]. Defaults to None.
             maxval ([type], optional): [description]. Defaults to None.
@@ -129,12 +150,23 @@ class StimSeq :
         Returns:
             [type]: [description]
         """        
+<<<<<<< HEAD
         for i in range(len(stimSeq)):
             for j in range(len(stimSeq[i])):
                 v = int(stimSeq[i][j]*scale)
                 if minval is not None: v=max(minval,v)
                 if maxval is not None: v=min(minval,v)
                 stimSeq[i][j] = v
+=======
+
+        if type(stimSeq[0][0]) is float :
+            for i in range(len(stimSeq)):
+                for j in range(len(stimSeq[i])):
+                    v = int(stimSeq[i][j]*scale)
+                    if minval is not None: v=max(minval,v)
+                    if maxval is not None: v=min(minval,v)
+                    stimSeq[i][j] = v
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         return stimSeq
 
     @staticmethod
@@ -260,13 +292,21 @@ class StimSeq :
         ss = StimSeq.fromString(f)
         return ss
 
+<<<<<<< HEAD
     def toFile(self, fname, comment:str=None):
+=======
+    def toFile(self, fname):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         """[summary]
 
         Args:
             fname ([type]): [description]
         """ 
+<<<<<<< HEAD
         print("Saving to: {}".format(fname))
+=======
+
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         if '.png' in fname:
             # write out as a .png file
             # convert to byte with range 0-255
@@ -359,6 +399,7 @@ def mkRowCol(width=5,height=5, repeats=10, nEvents=None, level:int=1):
     return StimSeq(None,array.tolist(),None)
 
 
+<<<<<<< HEAD
 def mkRandLevel(ncodes=36, nEvent=400, soa=3, jitter=1, minval=0, maxval=1, nlevels=10):
     """make a random levels stimulus -- where rand level every soa frames
 
@@ -415,6 +456,9 @@ def mkRandLevelSet(ncodes=36, nEvent=400, soa=3, jitter=1, levels:list=None):
 
 def mkFreqTag(period_phase=((4,0),(5,0),(6,0),(7,0),(8,0),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(3,2),(4,2),(5,2),(6,2),(7,2),(8,2),(4,3),(5,3),(6,3),(7,3),(8,3),(5,4),(6,4),(7,4),(8,4),(6,5),(7,5),(8,5),(7,6),(8,6),(8,7)),
             nEvent=840, isbinary=True, duty_cycle=.5):
+=======
+def mkFreqTag(period_phase=((4,0),(5,0),(6,0),(7,0),(8,0),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(3,2),(4,2),(5,2),(6,2),(7,2),(8,2),(4,3),(5,3),(6,3),(7,3),(8,3),(5,4),(6,4),(7,4),(8,4),(6,5),(7,5),(8,5),(7,6),(8,6),(8,7)),nEvent=120, isbinary=True):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     """Generate a frequency tagging stimulus sequence
 
     Args:
@@ -432,6 +476,7 @@ def mkFreqTag(period_phase=((4,0),(5,0),(6,0),(7,0),(8,0),(3,1),(4,1),(5,1),(6,1
         # generate the sequence
         if isbinary:
             s = (times + o) % l
+<<<<<<< HEAD
             if duty_cycle >=0:
                 s = s + np.random.uniform(-1e-3,1e-3,size=s.shape) # add some tie-breaking noise
                 array[:,i] = s > (l-1)*duty_cycle
@@ -440,10 +485,18 @@ def mkFreqTag(period_phase=((4,0),(5,0),(6,0),(7,0),(8,0),(3,1),(4,1),(5,1),(6,1
         else:
             s = np.sin( 2*np.pi* ( times.astype(np.float32)+o+1e-6)/l )
             s = (s + 1) / 2  # convert to 0-1 range
+=======
+            s = s + np.random.uniform(-1e-3,1e-3,size=s.shape)
+            array[:,i] = s > (l-1)/2
+        else:
+            s = np.sin( 2*np.pi* ( times.astype(np.float32)+o+1e-6)/l )
+            s = s / 2 + 1 # convert to 0-1 range
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
             array[:,i] = s
     return StimSeq(None,array.tolist(),None)
 
 
+<<<<<<< HEAD
 def mkBlockRandPatternReversal(ncodes=1, nEvent=None, nSweep=1, soa=0, blockLen=10, blockLevels:list()=None, randblk=True):
     """make a block random pattern reversal stimulus
     Args:
@@ -1114,6 +1167,11 @@ def mkCodes():
     bpr.plot(show=True,title='multifocal sweep pattern reversal')
     bpr.toFile(os.path.join(savedir,'multifocal_sweep_pr.txt'))
 
+=======
+def mkCodes():
+    """[summary]
+    """    
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     # test generators
     rc=mkRowCol(width=5,height=5, repeats=10)
     rc.plot(show=True,title='rc')
@@ -1197,6 +1255,10 @@ def load_n_plotstimSeq(savefile=None):
     plt.plot(ac)
     plt.subplot(212)
     plt.imshow(cc)
+
+    ssvep_cont = mkFreqTag(isbinary=False)
+    ssvep_cont.toFile('ssvep_cont.png')
+    ssvep_cont.toFile('ssvep_cont.txt')
 
 # testcase code
 if __name__ == "__main__":

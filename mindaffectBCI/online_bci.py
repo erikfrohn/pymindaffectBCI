@@ -18,6 +18,7 @@
 import os
 import signal
 from multiprocessing import Process
+<<<<<<< HEAD
 import subprocess
 from time import sleep
 import traceback
@@ -28,6 +29,14 @@ from mindaffectBCI.decoder.decoder import UNAME
 signal.signal(signal.SIGINT, lambda signum, frame: shutdown())
 signal.signal(signal.SIGTERM, lambda signum, frame: shutdown())
 
+=======
+import subprocess 
+from time import sleep
+import json
+import argparse
+import traceback
+
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 class NoneProc:
     """tempory class simulating a working null sub-process
     """
@@ -35,7 +44,11 @@ class NoneProc:
     def terminate(self): pass
     def join(self): pass
 
+<<<<<<< HEAD
 def startHubProcess(hub=None, label='online_bci', logdir=None):
+=======
+def startHubProcess(label='online_bci', logdir=None):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     """Start the process to manage the central utopia-hub
 
     Args:
@@ -47,15 +60,24 @@ def startHubProcess(hub=None, label='online_bci', logdir=None):
     Returns:
         hub (Process): sub-process for managing the started acquisition driver
     """    
+<<<<<<< HEAD
     if hub is None or hub == 'utopia':
         from mindaffectBCI.decoder import startUtopiaHub
         hub = startUtopiaHub.run(label=label, logdir=logdir)
 
+=======
+    from mindaffectBCI.decoder import startUtopiaHub
+    hub = startUtopiaHub.run(label=label, logdir=logdir)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     #hub = Process(target=startUtopiaHub.run, kwargs=dict(label=label), daemon=True)
     #hub.start()
     sleep(1)
     return hub
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 def startacquisitionProcess(acquisition, acq_args, label='online_bci', logdir=None):
     """Start the process to manage the acquisition of data from the amplifier
 
@@ -85,11 +107,17 @@ def startacquisitionProcess(acquisition, acq_args, label='online_bci', logdir=No
     elif acquisition.lower() == 'fakedata':
         print('Starting fakedata')
         from mindaffectBCI.examples.acquisition import utopia_fakedata
+<<<<<<< HEAD
         if acq_args is None:
             acq_args=dict(host='localhost', fs=200)
         acquisition = Process(target=utopia_fakedata.run, kwargs=acq_args, daemon=True)
         acquisition.start()
 
+=======
+        acq_args=dict(host='localhost', nch=4, fs=200)
+        acquisition = Process(target=utopia_fakedata.run, kwargs=acq_args, daemon=True)
+        acquisition.start()
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     elif acquisition.lower() == 'brainflow':
         from mindaffectBCI.examples.acquisition import utopia_brainflow
         if acq_args is None:
@@ -104,7 +132,11 @@ def startacquisitionProcess(acquisition, acq_args, label='online_bci', logdir=No
         acquisition = Process(target=utopia_ganglion.run, kwargs=acq_args, daemon=True)
         acquisition.start()
 
+<<<<<<< HEAD
     elif acquisition.lower() == 'cyton': # pyOpenBCI cyton driver
+=======
+    elif acquisition.lower() == 'cyton': # pyOpenBCI ganglion driver
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         from mindaffectBCI.examples.acquisition import utopia_cyton
         acquisition = Process(target=utopia_cyton.run, kwargs=acq_args, daemon=True)
         acquisition.start()
@@ -134,6 +166,7 @@ def startacquisitionProcess(acquisition, acq_args, label='online_bci', logdir=No
         acquisition = Process(target=utopia_tmsi.run, kwargs=acq_args, daemon=True)
         acquisition.start()
 
+<<<<<<< HEAD
     elif acquisition.lower() == 'ft' : # fieldtrip buffer port
         from mindaffectBCI.examples.acquisition import utopia_ft
         acquisition = Process(target=utopia_ft.run, kwargs=acq_args, daemon=True)
@@ -149,6 +182,12 @@ def startacquisitionProcess(acquisition, acq_args, label='online_bci', logdir=No
         # subproc in a procces.. needed to be compatible with rest of acq code
         acquisition = Process(target=utopia_cmd.run, kwargs=acq_args, daemon=True)
         acquisition.start() 
+=======
+    elif acquisition.lower() == 'ft' : # tmsi porti
+        from mindaffectBCI.examples.acquisition import utopia_ft
+        acquisition = Process(target=utopia_ft.run, kwargs=acq_args, daemon=True)
+        acquisition.start()
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
     else:
         raise ValueError("Unrecognised acquisition driver! {}".format(acquisition))
@@ -172,7 +211,10 @@ def startDecoderProcess(decoder,decoder_args, label='online_bci', logdir=None):
     Returns:
         Process: sub-process for managing the started decoder
     """    
+<<<<<<< HEAD
     target=None
+=======
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     if decoder.lower() == 'decoder' or decoder.lower() == 'mindaffectBCI.decoder.decoder'.lower():
         from mindaffectBCI.decoder import decoder
         if decoder_args is None:
@@ -180,6 +222,7 @@ def startDecoderProcess(decoder,decoder_args, label='online_bci', logdir=None):
         if not 'logdir' in decoder_args or decoder_args['logdir']==None: 
             decoder_args['logdir']=logdir
         print('Starting: {}'.format('mindaffectBCI.decoder.decoder'))
+<<<<<<< HEAD
         target = decoder.run
         # allow time for the decoder to startup
         sleep(4)
@@ -204,11 +247,23 @@ def startDecoderProcess(decoder,decoder_args, label='online_bci', logdir=None):
 
 def startPresentationProcess(presentation,presentation_args:dict=dict()):
     print("Attempting to start presentation: {}".format(presentation))
+=======
+        decoder = Process(target=decoder.run, kwargs=decoder_args, daemon=True)
+        decoder.start()
+        # allow time for the decoder to startup
+        sleep(4)
+    elif decoder.lower() == 'none':
+        decoder = NoneProc()
+    return decoder
+
+def startPresentationProcess(presentation,presentation_args):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     target=None
     if presentation.lower() == 'selectionMatrix'.lower() or presentation.lower() == 'mindaffectBCI.examples.presentation.selectionMatrix'.lower():
         if presentation_args is None:
             presentation_args = dict(symbols= [['Hello', 'Good bye'], 
                                                ['Yes',   'No']])
+<<<<<<< HEAD
         from mindaffectBCI.presentation import selectionMatrix
         target = selectionMatrix.run
 
@@ -217,11 +272,30 @@ def startPresentationProcess(presentation,presentation_args:dict=dict()):
         import mindaffectBCI.decoder.sigViewer 
         target= mindaffectBCI.decoder.sigViewer.run
         print("target: {}".format(target))
+=======
+        from mindaffectBCI.examples.presentation import selectionMatrix
+        target = selectionMatrix.run
+
+    elif presentation.lower() == 'sigviewer':
+        from mindaffectBCI.decoder.sigViewer import sigViewer
+        target=sigViewer.run
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
     elif presentation =='fakepresentation':
         import mindaffectBCI.noisetag
         target=mindaffectBCI.noisetag.run
 
+<<<<<<< HEAD
+=======
+    elif presentation.lower() == 'hue' or presentation.lower() == "colorwheel":
+        from mindaffectBCI.examples.presentation import colorwheel
+        target=colorwheel.run
+
+    elif presentation.lower() == 'rpigpio':
+        from mindaffectBCI.examples.presentation import rpigpio
+        target = rpigpio.run
+
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     elif isinstance(presentation,str) and not presentation == 'none':
         try:
             import importlib
@@ -242,6 +316,7 @@ def startPresentationProcess(presentation,presentation_args:dict=dict()):
     else:
         return None
 
+<<<<<<< HEAD
 def logConfiguration(args):
     import json
     from mindaffectBCI.utopiaController import utopiaControler
@@ -262,6 +337,9 @@ def run(label='', logdir=None, block=True, hub=None, args:dict=dict(),
         acquisition:str=None, acq_args:dict=dict(), 
         decoder:str='decoder', decoder_args:dict=dict(), 
         presentation:str='selectionMatrix', presentation_args:dict=dict()):
+=======
+def run(label='', logdir=None, block=True, acquisition=None, acq_args=None, decoder='decoder', decoder_args=None, presentation='selectionMatrix', presentation_args=None):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     """[summary]
 
     Args:
@@ -282,6 +360,7 @@ def run(label='', logdir=None, block=True, hub=None, args:dict=dict(),
     if acquisition is None: 
         acquisition = 'brainflow'
 
+<<<<<<< HEAD
     # make the logs directory if not already there
     if logdir is None:
         logdir=os.path.join(os.path.dirname(os.path.abspath(__file__)),'../logs')
@@ -290,6 +369,8 @@ def run(label='', logdir=None, block=True, hub=None, args:dict=dict(),
     # add the session info
     logdir = os.path.join(logdir,UNAME)
 
+=======
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     hub_process = None
     acquisition_process = None
     decoder_process = None
@@ -298,7 +379,11 @@ def run(label='', logdir=None, block=True, hub=None, args:dict=dict(),
         # start the utopia-hub process
         if hub_process is None or not hub_process.poll() is None:
             try:
+<<<<<<< HEAD
                 hub_process = startHubProcess(hub=hub, label=label, logdir=logdir)
+=======
+                hub_process = startHubProcess(label=label, logdir=logdir)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
             except:
                 hub_process = None
                 traceback.print_exc()
@@ -371,9 +456,13 @@ def run(label='', logdir=None, block=True, hub=None, args:dict=dict(),
             # wait for presentation to terminate
             presentation_process.join()
         else:
+<<<<<<< HEAD
             while True:
                 sleep(1)
             #hub_process.wait()
+=======
+            hub_process.wait()
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     else:
         return False
 
@@ -425,6 +514,7 @@ def shutdown(hub=None, acquisition=None, decoder=None):
         hub (subprocess, optional): handle to the hub subprocess object. Defaults to hub_process.
         acquisition (subprocess, optional): the acquisatin subprocess object. Defaults to acquisition_process.
         decoder (subprocess, optional): the decoder subprocess object. Defaults to decoder_process.
+<<<<<<< HEAD
     """
     print("Shutting down!!")
 
@@ -432,6 +522,22 @@ def shutdown(hub=None, acquisition=None, decoder=None):
     if decoder is None:
         global decoder_process
         decoder = decoder_process
+=======
+    """    
+    # use module globals if not given?
+    if hub is None: 
+        global hub_process
+        hub = hub_process
+    if acquisition is None:
+        global acquisition_process
+        acquisition = acquisition_process
+    if decoder is None:
+        global decoder_process
+        decoder = decoder_process
+
+    hub.terminate()
+
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     try: 
         decoder.terminate()
         decoder.join()
@@ -443,11 +549,15 @@ def shutdown(hub=None, acquisition=None, decoder=None):
         global acquisition_process
         acquisition = acquisition_process
     try:
+<<<<<<< HEAD
         # acquisition.send_signal(signal.SIGTERM) # shutdown test for saga driver in subproc 
+=======
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         acquisition.terminate()
         acquisition.join()
     except:
         pass
+<<<<<<< HEAD
 
 
     # BODGE[]: This is a really big hack to kill the hub--- it really really should not be necessary!
@@ -468,8 +578,45 @@ def shutdown(hub=None, acquisition=None, decoder=None):
     hub.communicate()
     print("Hub is dead?")
     print("If not kill with:  taskkill /F /IM java.exe")
+=======
+    
+
+    hub.wait()
+#    if os.name == 'nt': # hard kill
+#        subprocess.Popen("TASKKILL /F /PID {pid} /T".format(pid=hub_process.pid))
+#    else: # hard kill
+#        os.kill(hub_process.pid, signal.SIGTERM)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     #print('exit online_bci')
     exit(0)
+
+
+
+def load_config(config_file):
+    """load an online-bci configuration from a json file
+
+    Args:
+        config_file ([str, file-like]): the file to load the configuration from. 
+    """    
+    from mindaffectBCI.decoder.utils import search_directories_for_file
+    if isinstance(config_file,str):
+        # search for the file in py-dir if not in CWD
+        if not os.path.splitext(config_file)[1] == '.json':
+            config_file = config_file + '.json'
+        config_file = search_directories_for_file(config_file,os.path.dirname(os.path.abspath(__file__)))
+        print("Loading config from: {}".format(config_file))
+        with open(config_file,'r',encoding='utf8') as f:
+            config = json.load(f)
+    else:
+        print("Loading config from: {}".format(f))
+        config = json.load(f)
+
+    # set the label from the config file
+    if 'label' not in config or config['label'] is None:
+        # get filename without path or ext
+        config['label'] = os.path.splitext(os.path.basename(config_file))[0]
+        
+    return config
 
 
 def parse_args():
@@ -481,19 +628,31 @@ def parse_args():
     import argparse
     import json
     parser = argparse.ArgumentParser()
+<<<<<<< HEAD
     parser.add_argument('--label', type=str, help='user label for the data savefile. configfile name if None.', default=None)
     parser.add_argument('--config_file', type=str, help='JSON file with default configuration for the on-line BCI', default=None)#'debug')#'online_bci.json')
     parser.add_argument('--hub', type=str, help='the type of hub to run one-of: "none","ft"', default=None)
     parser.add_argument('--acquisition', type=str, help='set the acquisition driver type: one-of: "none","brainflow","fakedata","ganglion","eego"', default=None)
     parser.add_argument('--acq_args', type=json.loads, help='a JSON dictionary of keyword arguments to pass to the acquisition system', default=dict())
+=======
+    parser.add_argument('--label', type=str, help='user label for the data savefile', default=None)
+    parser.add_argument('--config_file', type=str, help='JSON file with default configuration for the on-line BCI', default=None)#'debug')#'online_bci.json')
+    parser.add_argument('--acquisition', type=str, help='set the acquisition driver type: one-of: "none","brainflow","fakedata","ganglion","eego"', default=None)
+    parser.add_argument('--acq_args', type=json.loads, help='a JSON dictionary of keyword arguments to pass to the acquisition system', default=None)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     parser.add_argument('--decoder', type=str, help='set eeg decoder function to use. one-of: "none", "decoder"', default=None)
     parser.add_argument('--decoder_args', type=json.loads, help='set JSON dictionary of keyword arguments to pass to the decoder. Note: need to doublequote the keywords!', default=dict())
     parser.add_argument('--presentation', type=str, help='set stimulus presentation function to use: one-of: "none","selectionMatrix"', default=None)
+<<<<<<< HEAD
     parser.add_argument('--presentation_args', type=json.loads, help='set JSON dictionary of keyword arguments to pass to the presentation system', default=dict())
+=======
+    parser.add_argument('--presentation_args', type=json.loads, help='set JSON dictionary of keyword arguments to pass to the presentation system', default=None)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     parser.add_argument('--logdir', type=str, help='directory where the BCI output files will be saved. Uses $installdir$/logs if None.', default=None)
 
     args = parser.parse_args()
     if args.config_file is None:
+<<<<<<< HEAD
         config_file = askloadconfigfile()
         setattr(args,'config_file',config_file)
 
@@ -507,12 +666,49 @@ def parse_args():
 
     if args.label is None and args.config_file:
         args.label = os.path.splitext(os.path.basename(args.config_file))[0]
+=======
+        try:
+            from tkinter import Tk
+            from tkinter.filedialog import askopenfilename
+            root = Tk()
+            root.withdraw()
+            filename = askopenfilename(initialdir=os.path.dirname(os.path.abspath(__file__)),
+                                        title='Chose mindaffectBCI Config File',
+                                        filetypes=(('JSON','*.json'),('All','*.*')))
+            setattr(args,'config_file',filename)
+        except:
+            print("Can't make file-chooser dialog, and no config file specified!  Aborting")
+            raise ValueError("No config file specified")
+
+
+
+    # load config-file
+    if args.config_file is not None:
+        config = load_config(args.config_file)
+
+        # MERGE the config-file parameters with the command-line overrides
+        for name in config: # config file parameter
+            val = config[name]
+            if name in args: # command line override available
+                newval = getattr(args, name)
+                if newval is None: # ignore not set
+                    pass
+                elif isinstance(val,dict): # dict, merge with config-file version
+                    val.update(newval)
+                else: # otherwise just override
+                    val = newval
+            setattr(args,name,val)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
     return args
 
 # N.B. we need this guard for multiprocessing on Windows!
 if __name__ == '__main__':
     args = parse_args()
+<<<<<<< HEAD
     run(label=args.label, logdir=args.logdir, hub=args.hub, acquisition=args.acquisition, acq_args=args.acq_args, 
+=======
+    run(label=args.label, logdir=args.logdir, acquisition=args.acquisition, acq_args=args.acq_args, 
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
                           decoder=args.decoder, decoder_args=args.decoder_args, 
                           presentation=args.presentation, presentation_args=args.presentation_args)

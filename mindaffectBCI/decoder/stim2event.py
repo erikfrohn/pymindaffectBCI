@@ -23,6 +23,7 @@ def stim2event(M:np.ndarray, evtypes=('re','fe'), axis:int=-2, oM:np.ndarray=Non
 
     Args:
      M  (...samp) or (...,samp,nY): for and/non-target features
+<<<<<<< HEAD
      evnames (tuple (nE), optional): str list of strings, or list of values, or list of functions.  Defaults to ('re','fe')
         "0", "1", "00", "11", "01", "10", "010" (aka. short), "0110" (aka long)
         "re", "onset" - rising edge, or onset of this event
@@ -33,6 +34,10 @@ def stim2event(M:np.ndarray, evtypes=('re','fe'), axis:int=-2, oM:np.ndarray=Non
         "reX,Y,Z" - rising to a value of X or Y or Z ...
         "feX,Y,Z" - falling from a value of X or Y or Z
         "prX,Y" - pattern reversal from X to Y or Y to X
+=======
+     evnames - [nE]:str list of strings:
+        "0", "1", "00", "11", "01" (aka. 're'), "10" (aka, fe), "010" (aka. short), "0110" (aka long)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         "nt"+evtname : non-target event, i.e. evtname occured for any other target
         "any"+evtname: any event, i.e. evtname occured for *any* target
         "first"+evtname: first occurance of event
@@ -156,8 +161,17 @@ def stim2event(M:np.ndarray, evtypes=('re','fe'), axis:int=-2, oM:np.ndarray=Non
         # 4-bit
         elif etype == "0110" or etype == 'long':
             F = equals_subarray(M, [0, 1, 1, 0], axis)
+<<<<<<< HEAD
 
         # continuous values
+=======
+        # diff
+        elif etype == "diff":
+            F = np.diff(M, axis=axis) != 0
+            # pad missing entry
+            padshape=list(F.shape); padshape[axis] = 1
+            F = np.append(np.zeros(padshape, dtype=F.dtype), F, axis)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
         elif etype == "rest": # i.e. no stimuli anywhere
             if not axis == M.ndim-2:
@@ -166,6 +180,7 @@ def stim2event(M:np.ndarray, evtypes=('re','fe'), axis:int=-2, oM:np.ndarray=Non
 
         elif etype == 'raw':
             F = M
+<<<<<<< HEAD
 
         elif etype.startswith("<"):
             n = float(etype[1:]) if len(etype)>1 else 0
@@ -200,14 +215,26 @@ def stim2event(M:np.ndarray, evtypes=('re','fe'), axis:int=-2, oM:np.ndarray=Non
                 F, s2estate, elab = fallfrom(M, val, axis, oM, etype)
             else:
                 F, s2estate, elab = fe(M, axis, oM, etype)
+=======
+        elif etype == 'grad': # i.e. gradient of the stimulus
+            F = np.diff(M,axis=axis)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
+
+        elif etype == 'onset':
+            # first stimulus RE for any output
+            F = np.cumsum(M>0, axis=axis, dtype=M.dtype) # number of stimulus since trial start 
+            F[F>1] = 0 # zero out if more than 1 stimulus since trial start
 
         else:
 
+<<<<<<< HEAD
             if callable(etype):
                 F, s2estate, elab = etype(M, axis, oM, etype=fn.__name__, **kwargs)
             else:
                 raise ValueError("Unrecognised evttype:{}".format(etype))
 
+=======
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         # apply any modifiers wanted to F
         if modifier == "nt":
             # non-target, means true when OTHER targets are high, i.e. or over other outputs
@@ -224,8 +251,11 @@ def stim2event(M:np.ndarray, evtypes=('re','fe'), axis:int=-2, oM:np.ndarray=Non
                 raise ValueError("any feature only for axis==-2")   
             # any, means true if any target is true, N.B. use logical_or to broadcast
             F = np.any(F > 0, axis=-1, keepdims=True)
+<<<<<<< HEAD
             #F = np.repeat(F,repeats=M.shape[-1],axis=-1) # blow up to orginal size
             s2estate = modifier + s2estate
+=======
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
         elif modifier in ('onset','first'):
             # first stimulus RE for any output
@@ -867,6 +897,7 @@ def testcase():
                   [0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0]])
 
     print("Raw  :{}".format(M))
+<<<<<<< HEAD
 
     e,l, _ = stim2event(M.T, 'hotyon_re', axis=-2)
     for s,v in zip(e.T,l): print("{}:{}".format(v,s))
@@ -927,6 +958,16 @@ def testcase():
     print("diff={}".format(np.max(np.abs(e.astype(int)-e2.astype(int)))))
     plot_stim_encoding(M,e,evtlabs, plot_all_zero_events=True, block=True,suptitle='{}'.format(evtlabs))    
 
+=======
+    e = stim2event(M, 'flash', axis=-1);     print("flash:{}".format(e[0, ...].T))
+    e = stim2event(M, 're', axis=-1);        print("re   :{}".format(e[0, ...].T))
+    e = stim2event(M, 'fe', axis=-1);        print("fe   :{}".format(e[0, ...].T))
+    e = stim2event(M, 'diff', axis=-1);      print("diff :{}".format(e[0, ...].T))
+    e = stim2event(M, ('re', 'fe'), axis=-1); print("refe :{}".format(e[0, ...].T))
+    e = stim2event(M, 'onset', axis=-1);     print("onset:{}".format(e[0, ...].T))
+    e = stim2event(M.T, ('re', 'fe', 'rest'), axis=-2); print("referest :{}".format(e[0, ...].T))
+    e = stim2event(M.T, 'ntre', axis=-2);      print("ntre :{}".format(e[0, ...].T))
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
     # test incremental calling, propogating prefix between calls
     oM= None

@@ -141,10 +141,16 @@ class UtopiaController:
 
     def isConnected(self):  return self.client.isConnected
     def gethostport(self):  return self.client.gethostport()
+<<<<<<< HEAD
     def gethost(self): return self.client.gethost()
 
     def sendStimulusEvent(self, stimulusState, timestamp=None,
                           targetState=None, objIDs=None, injectSignal:float=None):
+=======
+                
+    def sendStimulusEvent(self, stimulusState, timestamp=None, 
+                          targetState=None, objIDs=None):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         """
         Send a message to the Utopia-HUB informing of the current stimulus state
 
@@ -153,10 +159,18 @@ class UtopiaController:
             timestamp ([type], optional): [description]. Defaults to None.
             targetState ([type], optional): [description]. Defaults to None.
             objIDs ([type], optional): [description]. Defaults to None.
+<<<<<<< HEAD
             injectSignal (int,optional): inject a signal with this amplitude to fake data, should be 0-255 integer. If None then use the target state information. Defautls to None.
         Returns:
             [type]: [description]
         """
+=======
+
+        Returns:
+            [type]: [description]
+        """                          
+        
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         stimEvent = self.mkStimulusEvent(stimulusState, timestamp, targetState, objIDs)
         if self.client: self.client.sendMessage(stimEvent)
         # erp injection for debugging with fakedata
@@ -180,10 +194,17 @@ class UtopiaController:
         make a valid stimulus event for the given stimulus state
 
         Args:
+<<<<<<< HEAD
             stimulusState (list-of-int): the stimulus state of each object in objIDs
             timestamp (int, optional): timestamp for this stimulus change in milliseconds. Defaults to None.
             targetState ([type], optional): state of the current cued target. Defaults to None.
             objIDs (list-of-int, optional): the object Identifiers for the objects in stimulus state. Defaults to None.
+=======
+            stimulusState ([type]): [description]
+            timestamp ([type], optional): [description]. Defaults to None.
+            targetState ([type], optional): [description]. Defaults to None.
+            objIDs ([type], optional): [description]. Defaults to None.
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
         Raises:
             ValueError: [description]
@@ -191,7 +212,11 @@ class UtopiaController:
         Returns:
             [type]: [description]
         """                        
+<<<<<<< HEAD
         if not hasattr(stimulusState,'__iter__'): stimulusState=[stimulusState]
+=======
+        
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         if timestamp is None:
             timestamp = self.getTimeStamp()
         if not hasattr(objIDs,'__iter__'): objIDs=[objIDs]
@@ -385,7 +410,11 @@ def injectERP(amp, host="localhost", port=8300):
     Inject an erp into a simulated data-stream, sliently ignore if failed, e.g. because not simulated
 
     Args:
+<<<<<<< HEAD
         amp (int|float): amplitude of the injected signal, in the range 0-256
+=======
+        amp ([type]): [description]
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         host (str, optional): [description]. Defaults to "localhost".
         port (int, optional): [description]. Defaults to 8300.
     """    

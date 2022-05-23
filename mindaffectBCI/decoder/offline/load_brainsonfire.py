@@ -5,7 +5,11 @@ from mindaffectBCI.decoder.utils import block_randomize, butter_sosfilt, upsampl
 
 trigger_event='stimulus.note.play' # the actual times the user hit the button
 
+<<<<<<< HEAD
 def load_brainsonfire(datadir, sessdir=None, sessfn=None, fs_out=60, filterband=((45,65),(0,1),(25,-1)), subtriallen=10, nvirt=20, chIdx=slice(64), verb=2):
+=======
+def load_brainsonfire(datadir, sessdir=None, sessfn=None, fs_out=60, stopband=((45,65),(0,1),(25,-1)), subtriallen=10, nvirt=20, chIdx=slice(64), verb=2):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     
     # load the data file
     Xfn = datadir

@@ -13,4 +13,8 @@ python3 -m mindaffectBCI.online_bci
 deactivate
 rm -rf test
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 python3  -m twine upload dist/*

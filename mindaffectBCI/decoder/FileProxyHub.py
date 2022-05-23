@@ -15,7 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with pymindaffectBCI.  If not, see <http://www.gnu.org/licenses/>
 
+<<<<<<< HEAD
 from urllib.request import DataHandler
+=======
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 from mindaffectBCI.decoder.offline.read_mindaffectBCI import read_mindaffectBCI_message
 from mindaffectBCI.utopiaclient import DataPacket
 from mindaffectBCI.decoder.utils import askloadsavefile
@@ -46,7 +49,11 @@ class FileProxyHub:
         print('FileProxyHub.py:: playback file {} at {}x speedup'.format(self.filename,self.speedup))
     
     def getTimeStamp(self):
+<<<<<<< HEAD
         """ get the time-stamp in milliscecond on the data clock
+=======
+        """[summary]
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 
         Returns:
             [type]: [description]
@@ -113,6 +120,7 @@ class FileProxyHub:
         self.lastrealtimestamp = self.getRealTimeStamp()
         return msgs
 
+<<<<<<< HEAD
 
 def run(filename:str=None, speedup:float=1, timeout_ms:float=1000, host:str=None, only_data_messages:bool=True):
     """stream data from file to a live utopia hub
@@ -141,13 +149,20 @@ def run(filename:str=None, speedup:float=1, timeout_ms:float=1000, host:str=None
 
 
 def testcase(filename, speedup=None, fs=200, fs_out=200, filterband=((45,65),(0,3),(25,-1)), order=4):
+=======
+def testcase(filename, fs=200, fs_out=200, stopband=((45,65),(0,3),(25,-1)), order=4):
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     """[summary]
 
     Args:
         filename ([type]): [description]
         fs (int, optional): [description]. Defaults to 200.
         fs_out (int, optional): [description]. Defaults to 200.
+<<<<<<< HEAD
         filterband (tuple, optional): [description]. Defaults to ((45,65),(0,3),(25,-1)).
+=======
+        stopband (tuple, optional): [description]. Defaults to ((45,65),(0,3),(25,-1)).
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
         order (int, optional): [description]. Defaults to 4.
     """    
     import numpy as np
@@ -156,8 +171,13 @@ def testcase(filename, speedup=None, fs=200, fs_out=200, filterband=((45,65),(0,
     U = FileProxyHub(filename,speedup=speedup)
     tsfilt = timestamp_interpolation(fs=fs,sample2timestamp=linear_trend_tracker(500))
 
+<<<<<<< HEAD
     if filterband is not None:
         ppfn = butterfilt_and_downsample(filterband=filterband, order=order, fs=fs, fs_out=fs_out)
+=======
+    if stopband is not None:
+        ppfn = butterfilt_and_downsample(stopband=stopband, order=order, fs=fs, fs_out=fs_out)
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
     else:
         ppfn = None
     

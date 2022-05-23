@@ -15,7 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with pymindaffectBCI.  If not, see <http://www.gnu.org/licenses/>
 
+<<<<<<< HEAD
 from mindaffectBCI.utopiaclient import UtopiaMessage
+=======
+>>>>>>> a548ede18b5df0b53d3ccd030994f9147272f202
 import numpy as np
 from mindaffectBCI.utopiaclient import StimulusEvent, NewTarget
 from mindaffectBCI.decoder.utils import unwrap
