@@ -1,4 +1,3 @@
-from types import NoneType
 import numpy as np
 import matplotlib.pyplot as plt
 # force random seed for reproducibility
