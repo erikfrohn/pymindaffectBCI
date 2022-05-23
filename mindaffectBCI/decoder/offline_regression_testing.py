@@ -8,6 +8,8 @@ random.seed(seed)
 np.random.seed(seed)
 
 
+import json
+
 
 
 
@@ -213,8 +215,8 @@ if __name__=="__main__":
      StopThresh(P)  0.79  0.79  0.62  0.44  0.38  0.38  0.39  0.39   SSAE 15.6')
 
     with open('metrics.txt', 'w') as f:
-        if not res is NoneType:
-            f.write(res[1])
+        with open('json_data.json', 'w') as outfile:
+            json.dump(res, outfile)
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
@@ -234,8 +236,8 @@ if __name__=="__main__":
      StopThresh(P)  0.89  0.89  0.89  0.89  0.63  0.59  0.60  0.61   SSAE 14.7")
 
     with open('metrics.txt', 'w') as f:
-        if not res is NoneType:
-            f.write(res[1])
+        with open('json_data.json', 'w') as outfile:
+            json.dump(res, outfile)
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
@@ -254,11 +256,13 @@ if __name__=="__main__":
      StopThresh(P)  0.86  0.82  0.77  0.63  0.49  0.44  0.44  0.44   SSAE 23.9")
 
     with open('metrics.txt', 'w') as f:
-        if not res is NoneType:
-            f.write(res[1])
+        with open('json_data.json', 'w') as outfile:
+            json.dump(res, outfile)
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
             Perr(est)  0.57  0.39  0.31  0.26  0.21  0.19  0.17  0.16   PSAE 10.6\n\
             StopErr  0.94  0.94  0.78  0.53  0.44  0.42  0.41  0.41   AUSC 63.1\n\
         StopThresh(P)  0.79  0.79  0.62  0.44  0.38  0.38  0.39  0.39   SSAE 15.6')
+
+
