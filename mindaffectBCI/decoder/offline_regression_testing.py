@@ -6,9 +6,8 @@ import random
 random.seed(seed)
 np.random.seed(seed)
 
-
 import json
-
+from mindaffectBCI.decoder.offline.datasets import add_dataroot
 
 
 
@@ -17,6 +16,7 @@ import json
 
 
 def setup_plos_one():
+    add_dataroot('data')
     dataset = "plos_one"
     dataset_args = dict()
 
@@ -40,6 +40,7 @@ def setup_plos_one():
 
 
 def setup_mindaffectBCI():
+    add_dataroot('data')
     dataset="mindaffectBCI" 
     dataset_args=dict(exptdir='~/Desktop/mark', regexp='.*noisetag.*')
 
@@ -64,6 +65,7 @@ def setup_mindaffectBCI():
 
 
 def setup_lowlands():
+    add_dataroot('data')
     dataset='lowlands'
     dataset_args=dict()
 
@@ -110,6 +112,7 @@ def pipeline_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, cv
     from mindaffectBCI.decoder.decodingCurveSupervised import print_decoding_curve
 
     loader, filenames, _ = get_dataset(dataset,**dataset_args)
+    add_dataroot('data')
 
     print("\n{} Files\n: {}".format(len(filenames),filenames))
 
@@ -203,6 +206,7 @@ def regression_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, 
 
 
 if __name__=="__main__":
+    add_dataroot('data')
     print('------------------\n\n P L O S    O N E\n\n---------------------')
     dataset, dataset_args, loader_args, pipeline, cv = setup_plos_one()
     res1 = regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
