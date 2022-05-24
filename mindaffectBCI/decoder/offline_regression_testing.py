@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mindaffectBCI.decoder.offline.datasets import add_dataroot
 # force random seed for reproducibility
 seed=0
 import random
@@ -108,10 +107,9 @@ def setup_lowlands():
 def pipeline_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, cv):
     from mindaffectBCI.decoder.analyse_datasets import decoding_curve_GridSearchCV, datasets_decoding_curve_GridSearchCV, average_results_per_config, plot_decoding_curves, concurrent_analyse_datasets
     from mindaffectBCI.decoder.preprocess_transforms import make_preprocess_pipeline
-    import mindaffectBCI.decoder.offline.datasets
+    from mindaffectBCI.decoder.offline.datasets import get_dataset
     from mindaffectBCI.decoder.decodingCurveSupervised import print_decoding_curve
 
-    add_dataroot('data')
     loader, filenames, _ = get_dataset(dataset,**dataset_args)
 
     print("\n{} Files\n: {}".format(len(filenames),filenames))
