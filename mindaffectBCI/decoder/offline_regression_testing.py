@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 # force random seed for reproducibility
 seed=0
 import random
@@ -204,7 +205,9 @@ def regression_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, 
 
 
 if __name__=="__main__":
+    from mindaffectBCI.decoder.offline.datasets import add_dataroot
     add_dataroot('data')
+    
     print('------------------\n\n P L O S    O N E\n\n---------------------')
     dataset, dataset_args, loader_args, pipeline, cv = setup_plos_one()
     res = regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
