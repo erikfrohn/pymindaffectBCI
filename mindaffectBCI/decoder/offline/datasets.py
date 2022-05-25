@@ -35,6 +35,7 @@ dataroots = ['~/data/bci',
             '/content/drive/Shareddrives/Data',
             '/home/shared/drive/',
             'D://',
+            'data',
             '.'
             ]
 

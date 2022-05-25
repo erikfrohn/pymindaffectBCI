@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mindaffectBCI.decoder.offline.datasets import add_dataroot
 # force random seed for reproducibility
 seed=0
 import random
