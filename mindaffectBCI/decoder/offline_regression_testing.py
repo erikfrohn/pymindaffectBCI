@@ -8,8 +8,6 @@ random.seed(seed)
 np.random.seed(seed)
 
 
-import json
-
 
 
 
@@ -108,8 +106,10 @@ def pipeline_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, cv
     from mindaffectBCI.decoder.analyse_datasets import decoding_curve_GridSearchCV, datasets_decoding_curve_GridSearchCV, average_results_per_config, plot_decoding_curves, concurrent_analyse_datasets
     from mindaffectBCI.decoder.preprocess_transforms import make_preprocess_pipeline
     from mindaffectBCI.decoder.offline.datasets import get_dataset
+    from mindaffectBCI.decoder.offline.datasets import add_dataroot
     from mindaffectBCI.decoder.decodingCurveSupervised import print_decoding_curve
 
+    add_dataroot('data')
     loader, filenames, _ = get_dataset(dataset,**dataset_args)
 
     print("\n{} Files\n: {}".format(len(filenames),filenames))
@@ -204,6 +204,7 @@ def regression_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, 
 
 
 if __name__=="__main__":
+    add_dataroot('data')
     print('------------------\n\n P L O S    O N E\n\n---------------------')
     dataset, dataset_args, loader_args, pipeline, cv = setup_plos_one()
     res = regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
