@@ -8,8 +8,6 @@ random.seed(seed)
 np.random.seed(seed)
 
 
-import json
-
 
 
 
@@ -41,7 +39,7 @@ def setup_plos_one():
 
 
 def setup_mindaffectBCI():
-    dataset="mindaffectBCI" 
+    dataset="kaggle" 
     dataset_args=dict(exptdir='~/Desktop/mark', regexp='.*noisetag.*')
 
     # default pipeline -- filter for slow-drift and line-noise at load time so no startup artifacts
@@ -206,6 +204,7 @@ def regression_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, 
 
 
 if __name__=="__main__":
+    
     print('------------------\n\n P L O S    O N E\n\n---------------------')
     dataset, dataset_args, loader_args, pipeline, cv = setup_plos_one()
     res = regression_test(dataset, dataset_args, loader_args=loader_args, pipeline=pipeline, cv=cv)
@@ -217,8 +216,7 @@ if __name__=="__main__":
      StopThresh(P)  0.79  0.79  0.62  0.44  0.38  0.38  0.39  0.39   SSAE 15.6')
 
     with open('metrics.txt', 'w') as f:
-        with open('json_data.json', 'w') as outfile:
-            json.dump(res, outfile)
+        
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
@@ -238,8 +236,7 @@ if __name__=="__main__":
      StopThresh(P)  0.89  0.89  0.89  0.89  0.63  0.59  0.60  0.61   SSAE 14.7")
 
     with open('metrics.txt', 'w') as f:
-        with open('json_data.json', 'w') as outfile:
-            json.dump(res, outfile)
+        
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
@@ -258,8 +255,7 @@ if __name__=="__main__":
      StopThresh(P)  0.86  0.82  0.77  0.63  0.49  0.44  0.44  0.44   SSAE 23.9")
 
     with open('metrics.txt', 'w') as f:
-        with open('json_data.json', 'w') as outfile:
-            json.dump(res, outfile)
+        
         f.write('BASELINE: 336f594\n Ave-DC\n\
                 IntLen   100   201   277   378   478   554   655   756\n\
                 Perr  0.72  0.41  0.39  0.27  0.26  0.20  0.18  0.15   AUDC 35.2\n\
