@@ -6,7 +6,7 @@ from pp import pp
 
 def app():
 
-    dfs, column_names, columns_names2, columns_names2, path_list, time, mds = pp()
+    dfs, column_names, columns_names2, path_list, time = pp() #columns_names2 mds
 
     perr = []
     perr_e = []
