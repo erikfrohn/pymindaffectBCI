@@ -24,10 +24,10 @@ def app():
     avg_l_audc = []
     avg_p_audc = []
 
-    for i in range(0, len(dfs), 18):
-        avg_k_audc.append( dfs[i]['ave-AUDC'] )
-        avg_l_audc.append (  dfs[i+1]['ave-AUDC'] )
-        avg_p_audc.append( dfs[i+3]['ave-AUDC'] )
+    #for i in range(0, len(dfs), 18):
+    avg_k_audc.append( dfs[0]['ave-AUDC'], dfs[18]['ave-AUDC'] )
+    avg_l_audc.append ( dfs[1]['ave-AUDC'], dfs[19]['ave-AUDC'] )
+    avg_p_audc.append( dfs[3]['ave-AUDC'], dfs[21]['ave-AUDC'] )
 
     new_k_audc = np.array(avg_k_audc)
     new_l_audc = np.array(avg_l_audc)
