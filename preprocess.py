@@ -15,6 +15,7 @@ for path in list_csv:
     path_list.append(path.split(os.sep))
 
 time = [path[1] for path in path_list] 
+file = [path[2] for path in path_list]
 
 for i in (list_csv):
     df = pd.read_csv(i)
@@ -60,10 +61,16 @@ avg_k_audc = []
 avg_l_audc = []
 avg_p_audc = []
 
+
+for i in range(0, len(dfs)):
+    id_k = file.index('kaggle.csv')
+    id_l = file.index('lowlands.csv')
+    id_p = file.index('plos_one.csv')
+
 for i in range(0, len(dfs), 18):
-    avg_k_audc.append(dfs[i]['ave-AUDC'])
-    avg_l_audc.append(dfs[i+1]['ave-AUDC'])
-    avg_p_audc.append(dfs[i+3]['ave-AUDC'])
+    avg_k_audc.append(dfs[id_k]['ave-AUDC'])
+    avg_l_audc.append(dfs[id_l]['ave-AUDC'])
+    avg_p_audc.append(dfs[id_p]['ave-AUDC'])
 
 new_k_audc = np.array(avg_k_audc)
 new_l_audc = np.array(avg_l_audc)
@@ -72,7 +79,37 @@ new_p_audc = np.array(avg_p_audc)
 input = np.array([new_k_audc[:,0], new_l_audc[:,0], new_p_audc[:,0]])
 
 print(input)
-print(dfs[3]['ave-AUDC'])
+
+perr = []
+perr_e = []
+se = []
+st = []
+
+id = 4
+
+perr.append( dfs[id]['prob_err'] )
+perr_e.append (  dfs[id]['prob_err_est'] )
+se.append( dfs[id]['se'] )
+st.append(dfs[id]['st'])
+
+new_perr = np.array(perr)
+new_perr_e = np.array(perr_e)
+new_se = np.array(se)
+new_st = np.array(st)
+
+file = [path[2] for path in path_list]
+name = file[id]
+
+input = np.array([new_perr, new_perr_e, new_se, new_st]).reshape(4,30)
+#print(np.random.randn(20, 3))
+f = np.transpose(input)
+print(f)
+print(f.shape)
+
+#print(input)
+#print(file)
+#print(dfs[0])
+#print(dfs['_LL_eng_02_20170818_tr_train_1_mat'])
 #print(np.transpose(input))
 #print(new_k_audc)
 #print(np.transpose(input))

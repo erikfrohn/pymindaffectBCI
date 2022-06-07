@@ -68,7 +68,7 @@ def app():
     sha = np.unique(np.array(time))
 
     col1, col2 = st.columns([2, 1])
-    col1.write(pd.DataFrame({'Commit-ID': range(len(sha)),
+    col1.write(pd.DataFrame({'Commit-ID': range(1, len(sha)+1),
         'SHA': sha
     }))
     # col1.write(pd.DataFrame({'Data source': ['Kaggle', 'Plos_one', 'Lowlands'],
