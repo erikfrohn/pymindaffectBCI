@@ -26,7 +26,7 @@ def app():
     
     #col1, col2 = st.columns([5, 1])
     for i in range(len(dfs)):
-        st.write(dfs[0])
+        st.write(dfs[i])
 #         'SHA': sha
 #     }))
     
