@@ -48,12 +48,12 @@ def app():
     
     #for i in range(0, len(dfs), 18):
     for i in range(len(l_k)):
-#         id1 = id_k[i]
-#         id2 = id_l[i]
-#         id3 = id_p[i]
-        avg_k_audc.append( dfs[i]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
-        avg_l_audc.append( dfs[i]['ave-AUDC']) #, dfs[19]['ave-AUDC'] )
-        avg_p_audc.append( dfs[i]['ave-AUDC']) #, dfs[21]['ave-AUDC'] )
+        id1 = id_k[i]
+        id2 = id_l[i]
+        id3 = id_p[i]
+        avg_k_audc.append( dfs[id1]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
+        avg_l_audc.append( dfs[id2]['ave-AUDC']) #, dfs[19]['ave-AUDC'] )
+        avg_p_audc.append( dfs[id3]['ave-AUDC']) #, dfs[21]['ave-AUDC'] )
 
     new_k_audc = np.array(avg_k_audc)
     new_l_audc = np.array(avg_l_audc)
