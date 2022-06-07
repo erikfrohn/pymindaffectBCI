@@ -1,15 +1,12 @@
 import csv
 import glob
-#import globber as glob
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import os
 
 def pp():
-    list_csv = glob.glob('csv/*/*.csv')
-    #rdir=r"d:\temp"
-   # flist=[os.path.join(rdir,fil) for fil in os.listdir(rdir) if fil.endswith(".xls")]
+    list_csv = glob.glob('csv/**/*.csv')
     dfs = []
 
     path_list = []
