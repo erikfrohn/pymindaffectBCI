@@ -13,7 +13,7 @@ jobs:
           # Your ML workflow goes here
           pip install -r requirements.txt
           
-          python FH_Pipeline2.py
+          python mindaffectBCI\decoder\offline_regression_testing.py
           
           echo "## OUTPUT FROM CML.YAML" > report.md
           echo "\n## Model Metrics" > report.md
