@@ -6,6 +6,11 @@ import numpy as np
 import os
 
 def pp():
+    
+    path2 = "csv/"
+    dir_list2 = os.listdir(path)
+    
+    
     list_csv = glob.glob('csv/*/*.csv')
     dfs = []
 
