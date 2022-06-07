@@ -7,10 +7,10 @@ import numpy as np
 import os
 
 def pp():
-    #list_csv = glob.glob('csv/*/*.csv')
-    rdir=r"d:\temp"
-    flist=[os.path.join(rdir,fil) for fil in os.listdir(rdir) if fil.endswith(".xls")]
-    dfs = []
+    list_csv = glob.glob('csv/*/*.csv')
+    #rdir=r"d:\temp"
+   # flist=[os.path.join(rdir,fil) for fil in os.listdir(rdir) if fil.endswith(".xls")]
+   # dfs = []
 
     path_list = []
 
