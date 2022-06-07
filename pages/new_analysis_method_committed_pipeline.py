@@ -36,11 +36,11 @@ def app():
 
     id_array = np.array([id])
 
-    id_k = np.where(id_array == 'kaggle.csv')
+    id_k = np.where(id_array == 'kaggle.csv')[1]
     
-    id_l = np.where(id_array == 'lowlands.csv')
+    id_l = np.where(id_array == 'lowlands.csv')[1]
     
-    id_p = np.where(id_array == 'plos_one.csv')
+    id_p = np.where(id_array == 'plos_one.csv')[1]
     
     l_k = id_k.tolist()
     l_l = id_l.tolist()
