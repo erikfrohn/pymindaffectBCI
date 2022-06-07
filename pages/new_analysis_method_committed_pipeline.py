@@ -25,7 +25,8 @@ def app():
     avg_p_audc = []
     
     #col1, col2 = st.columns([5, 1])
-    st.write(dfs[0])
+    for i in range(len(dfs)):
+        st.write(dfs[0])
 #         'SHA': sha
 #     }))
     
