@@ -25,27 +25,27 @@ def app():
     avg_p_audc = []
 
     #for i in range(0, len(dfs), 18):
-    avg_k_audc.append( dfs[0]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
-    avg_l_audc.append ( dfs[1]['ave-AUDC']) #, dfs[19]['ave-AUDC'] )
-    avg_p_audc.append( dfs[3]['ave-AUDC']) #, dfs[21]['ave-AUDC'] )
+    #avg_k_audc.append( dfs[0]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
+    #avg_l_audc.append ( dfs[1]['ave-AUDC']) #, dfs[19]['ave-AUDC'] )
+    #avg_p_audc.append( dfs[3]['ave-AUDC']) #, dfs[21]['ave-AUDC'] )
 
-    new_k_audc = np.array(avg_k_audc)
-    new_l_audc = np.array(avg_l_audc)
-    new_p_audc = np.array(avg_p_audc)
+    #new_k_audc = np.array(avg_k_audc)
+    #new_l_audc = np.array(avg_l_audc)
+    #new_p_audc = np.array(avg_p_audc)
 
-    input = np.array([new_k_audc[:,0], new_l_audc[:,0], new_p_audc[:,0]])
+    #input = np.array([new_k_audc[:,0], new_l_audc[:,0], new_p_audc[:,0]])
 
-    source = pd.DataFrame(np.transpose(input),
-                          columns=['Kaggle', 'Lowlands', 'Plos_one'], index=pd.RangeIndex(1, len(avg_k_audc)+1, name='Commit-ID'))
-    source = source.reset_index().melt('Commit-ID', var_name='dataset', value_name='avg-AUDC')
-    line = alt.Chart(source).mark_line(interpolate='basis').encode(
-        x='Commit-ID:Q',
-        y='avg-AUDC:Q',
-        color='dataset:N'
-    ).properties(
-    title='Average AUDC across commits'
-)
-    st.altair_chart(line, use_container_width=True)
+#     source = pd.DataFrame(np.transpose(input),
+#                           columns=['Kaggle', 'Lowlands', 'Plos_one'], index=pd.RangeIndex(1, len(avg_k_audc)+1, name='Commit-ID'))
+#     source = source.reset_index().melt('Commit-ID', var_name='dataset', value_name='avg-AUDC')
+#     line = alt.Chart(source).mark_line(interpolate='basis').encode(
+#         x='Commit-ID:Q',
+#         y='avg-AUDC:Q',
+#         color='dataset:N'
+#     ).properties(
+#     title='Average AUDC across commits'
+# )
+#     st.altair_chart(line, use_container_width=True)
 
     #source = source.reset_index().melt('Commit-ID', var_name='dataset', value_name='avg-AUDC')
     #line = alt.Chart(source).mark_line(interpolate='basis').encode(
@@ -58,16 +58,16 @@ def app():
     # col1, col2 = st.columns(2)
 
 
-    branch = []
-    #time = []
+#     branch = []
+#     #time = []
 
-    for i in mds:
-        branch.append(i['branch'])
-        #time.append(i['current_date_and_time'])
+#     for i in mds:
+#         branch.append(i['branch'])
+#         #time.append(i['current_date_and_time'])
 
-    sha = np.unique(np.array(time))
+#     sha = np.unique(np.array(time))
 
-    col1, col2 = st.columns([2, 1])
-    col1.write(pd.DataFrame({'Commit-ID': range(1, len(sha)+1),
-        'SHA': sha
-    }))
+#     col1, col2 = st.columns([2, 1])
+#     col1.write(pd.DataFrame({'Commit-ID': range(1, len(sha)+1),
+#         'SHA': sha
+#     }))
