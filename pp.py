@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 def pp():
-    #list_csv = glob.glob('csv/**/*.csv')
+    list_csv = glob.glob('csv/**/*.csv')
     dfs = []
 
     path_list = []
@@ -14,7 +14,7 @@ def pp():
     for path in list_csv:
         path_list.append(path.split(os.sep))
 
-    time = [path[1] for path in path_list] 
+    time = [path[1] for path in path_list]
 
     for i in (list_csv):
         df = pd.read_csv(i)
