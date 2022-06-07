@@ -23,6 +23,8 @@ def app():
     avg_k_audc = []
     avg_l_audc = []
     avg_p_audc = []
+    
+    st.line_chart(dfs[0]['AUDC'])
 
     #for i in range(0, len(dfs), 18):
     #avg_k_audc.append( dfs[0]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
