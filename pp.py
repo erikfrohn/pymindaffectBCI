@@ -8,7 +8,7 @@ import os
 def pp():
     
     path2 = "csv/"
-    dir_list2 = os.listdir(path)
+    dir_list2 = os.listdir(path2)
     
     
     list_csv = glob.glob('csv/*/*.csv')
