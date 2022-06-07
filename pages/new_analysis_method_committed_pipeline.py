@@ -33,28 +33,27 @@ def app():
     #st.line_chart(dfs[0]['AUDC'])
     
     id = [path[2] for path in path_list]
-    
-    id_k = []
-    id_l = []
-    id_p = []
-    
-#     for i, count enumerate(id):
-#         if i=='kaggle.csv':
-#             id_k.append(count)
-#         if i=='lowlands.csv':
-#             id_l.append(count)
-#         if i=='plos_one.csv':
-#             id_p.append(count)
-        
 
-    for i in range(0, len(dfs), 18):
-#     for i in range(len(id_k)):
+    id_array = np.array([id])
+
+    id_k = np.where(id_array == 'kaggle.csv')
+    
+    id_l = np.where(id_array == 'lowlands.csv')
+    
+    id_p = np.where(id_array == 'plos_one.csv')
+    
+    l_k = id_k.tolist()
+    l_l = id_l.tolist()
+    l_p = id_p.tolist()
+    
+    #for i in range(0, len(dfs), 18):
+    for i in range(len(l_k)):
 #         id1 = id_k[i]
 #         id2 = id_l[i]
 #         id3 = id_p[i]
-        avg_k_audc.append( dfs[i+1]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
-        avg_l_audc.append( dfs[i+5]['ave-AUDC']) #, dfs[19]['ave-AUDC'] )
-        avg_p_audc.append( dfs[i+7]['ave-AUDC']) #, dfs[21]['ave-AUDC'] )
+        avg_k_audc.append( dfs[i]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
+        avg_l_audc.append( dfs[i]['ave-AUDC']) #, dfs[19]['ave-AUDC'] )
+        avg_p_audc.append( dfs[i]['ave-AUDC']) #, dfs[21]['ave-AUDC'] )
 
     new_k_audc = np.array(avg_k_audc)
     new_l_audc = np.array(avg_l_audc)
