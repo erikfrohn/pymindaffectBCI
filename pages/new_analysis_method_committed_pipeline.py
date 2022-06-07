@@ -68,46 +68,6 @@ def app():
     sha = np.unique(np.array(time))
 
     col1, col2 = st.columns([2, 1])
-    col1.write(pd.DataFrame({'Commit-ID': range(len(sha)),
+    col1.write(pd.DataFrame({'Commit-ID': range(1, len(sha)+1),
         'SHA': sha
     }))
-    # col1.write(pd.DataFrame({'Data source': ['Kaggle', 'Plos_one', 'Lowlands'],
-    #     'Dataset name': ['mindaffectBCI_noisetag_bci_201029_1340_ganglion.txt','Perr_plos_one_supervised_...','LL_eng_02_20170818_tr_train_1.mat']
-    # }))
-
-    #unique_branches = np.unique(np.array(branch))
-
-    #count_branch = []
-
-    #for br in unique_branches:
-        #count_branch.append(branch.count(br))
-    
-    # col1, col2 = st.columns(2)
-    # chart_data = pd.DataFrame(
-    #     np.array([[1, 2, 3], [4, 5, 6],[4, 5, 6]]),
-    #     columns=['open_source', 'master', 'wip'])
-    #
-    # col1.line_chart(chart_data)
-    # #col2.chart_data.
-    #
-    # col2.write(pd.DataFrame({
-    #     'first column': [1, 2, 3, 4],
-    #     'second column': [10, 20, 30, 40]
-    # }))
-    #
-    # col3, col4 = st.columns(2)
-    # chart_data2 = pd.DataFrame(
-    #     np.array([[20.500, 15.513, 90.667], [57.833, 23.077, 34.667],[46.000, 32.436, 30.333],[36.667, 20.256, 25.222],[46.000, 28.718, 33.456]]),
-    #     columns=['kaggle', 'plos_one', 'lowlands'])
-    #
-    # # col3.line_chart(chart_data2)
-    #
-    # line_chart = alt.Chart(chart_data2).mark_line(interpolate='basis').encode(
-    # alt.X('x', title='Year'),
-    # alt.Y('y', title='Amount in liters'),
-    # color='category:N'
-    # ).properties(
-    # title='Sales of consumer goods'
-    # )
-    #
-    # st.altair_chart(line_chart)
