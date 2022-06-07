@@ -18,7 +18,7 @@ def app():
     # )
     #test
 
-    dfs, column_names, columns_names2, columns_names2, path_list, time, mds = pp()
+    dfs, column_names, columns_names2, path_list, time  = pp() #columns_names2 mds
 
     avg_k_audc = []
     avg_l_audc = []
