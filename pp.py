@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 def pp():
-    list_csv = glob.glob('csv/**/*.csv')
+    #list_csv = glob.glob('csv/**/*.csv')
     dfs = []
 
     path_list = []
