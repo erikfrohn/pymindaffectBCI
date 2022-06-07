@@ -38,23 +38,23 @@ def app():
     id_l = []
     id_p = []
     
-    for i, count enumerate(id):
-        if i=='kaggle.csv':
-            id_k.append(count)
-        if i=='lowlands.csv':
-            id_l.append(count)
-        if i=='plos_one.csv':
-            id_p.append(count)
+#     for i, count enumerate(id):
+#         if i=='kaggle.csv':
+#             id_k.append(count)
+#         if i=='lowlands.csv':
+#             id_l.append(count)
+#         if i=='plos_one.csv':
+#             id_p.append(count)
         
 
-    #for i in range(0, len(dfs), 18):
-    for i in range(len(id_k)):
-        id1 = id_k[i]
-        id2 = id_l[i]
-        id3 = id_p[i]
-        avg_k_audc.append( dfs[id1]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
-        avg_l_audc.append( dfs[id2]['ave-AUDC']) #, dfs[19]['ave-AUDC'] )
-        avg_p_audc.append( dfs[id3]['ave-AUDC']) #, dfs[21]['ave-AUDC'] )
+    for i in range(0, len(dfs), 18):
+#     for i in range(len(id_k)):
+#         id1 = id_k[i]
+#         id2 = id_l[i]
+#         id3 = id_p[i]
+        avg_k_audc.append( dfs[i+1]['ave-AUDC']) #, dfs[18]['ave-AUDC'] )
+        avg_l_audc.append( dfs[i+5]['ave-AUDC']) #, dfs[19]['ave-AUDC'] )
+        avg_p_audc.append( dfs[i+7]['ave-AUDC']) #, dfs[21]['ave-AUDC'] )
 
     new_k_audc = np.array(avg_k_audc)
     new_l_audc = np.array(avg_l_audc)
