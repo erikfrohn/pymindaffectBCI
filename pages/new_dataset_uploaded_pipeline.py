@@ -64,5 +64,5 @@ def app():
     input2 = np.array([new_perr2, new_perr_e2, new_se2, new_st2]).reshape(4,30)
 
     source2 = pd.DataFrame(np.transpose(input2), columns=['Perr', 'Perr_est', 'Se', 'St'])
-    st.subheader(name2)
+    st.header(name2)
     st.line_chart(source2)
