@@ -51,4 +51,4 @@ def pp():
 
     column_names3 = mds[0].columns.tolist()
 
-    return dfs, column_names, columns_names2, path_list, time
+    return dfs, column_names, columns_names2, path_list, time, columns_names3, mds  
