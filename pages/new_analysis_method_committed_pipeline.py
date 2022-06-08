@@ -64,5 +64,5 @@ def app():
     #it creates a table with the commit ids and the corresponding sha keys
     col1, col2 = st.columns([2, 1])
     col1.write(pd.DataFrame({'Commit-ID': range(1, len(sha)+1),
-         'SHA': sha
+         'SHA': np.unique(sha)
      }))
