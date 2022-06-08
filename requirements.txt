@@ -3,7 +3,7 @@ pandas==1.2.4
 streamlit==1.9.0
 matplotlib==3.3.4
 seaborn==0.11.1
-numpy==1.20.3
+numpy==1.19.5
 openpyxl==3.0.10
 protobuf~=3.19.0
 globber==0.2.1 
