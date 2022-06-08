@@ -16,6 +16,7 @@ jobs:
           # Your ML workflow goes here
           pip install -r requirements-pipeline.txt
           pip install --upgrade pip
+          pip install --upgrade pip setuptools wheel
           pip install -e .
           pip install pygit2
           
