@@ -14,11 +14,14 @@ random.seed(seed)
 np.random.seed(seed)
 import csv
 
-#make directory for csv files
+# Make directory for csv files
 if __name__ == "__main__":
     dir =  meta2csv()+ '/'
 
 def setup_plos_one():
+    '''
+    Setup variables and pipeline for plos_one
+    '''
     dataset = "plos_one"
     dataset_args = dict()
 
@@ -42,6 +45,9 @@ def setup_plos_one():
 
 
 def setup_kaggle():
+    '''
+    Setup variables and pipeline for kaggle
+    '''
     dataset="kaggle"
     dataset_args = dict()
 
@@ -64,6 +70,9 @@ def setup_kaggle():
     
 
 def setup_mindaffectBCI():
+    '''
+    Setup variables and pipeline for mindaffectBCI
+    '''
     dataset="mindaffectBCI" 
     dataset_args=dict(exptdir='~/Desktop/mark', regexp='.*noisetag.*')
 
@@ -88,6 +97,9 @@ def setup_mindaffectBCI():
 
 
 def setup_lowlands():
+    '''
+    Setup variables and pipeline for lowlands
+    '''
     dataset='lowlands'
     dataset_args=dict()
 
@@ -154,7 +166,17 @@ def pipeline_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, cv
     #     print("\n\n{} {}\n".format(conf, res['filename'][si]))
     #     print(print_decoding_curve(*dc))
 
+    save_csv_summaries(dataset, filenames, clsfr, res)
+    save_csv_separate_files(filenames, res)
+    return res
 
+
+def save_csv_summaries(dataset, filenames, clsfr, res):
+    '''
+    Saves csv files for the dataset summaries in csv/current-sha folder.
+    It saves: filename, classifier, audc, ave-audc, baseline-audc
+    File examples: kaggle.csv, lowlands.csv, etc
+    '''
     ## ---------------------------
     ## ---------------------------
     # SAVE SUMMARY PER DATA REPO (kaggle, lowlands, etc.)
@@ -177,19 +199,21 @@ def pipeline_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, cv
         writer = csv.writer(f)
         writer.writerow(['file', 'clsfr', 'AUDC', 'ave-AUDC', 'baseline-AUDC'])
         writer.writerows(data_int)
-    ## ---------------------------
-    ## ---------------------------
-    
 
+def save_csv_separate_files(filenames, res):
+    '''
+    Saves csv files for separate datafiles in csv/current-sha folder.
+    It saves the decoding information table summary (int_len, prob_err, prob_err_est, se, st).
+    File example: _LL_eng_02_20170818_tr_train_1_mat.csv
+    '''
     ## ---------------------------
     ## ---------------------------
     # SAVE TABLE PER DATASET FILE
     ## ---------------------------
     ## ---------------------------
-    
 
     for i,file in enumerate(filenames):
-        # Parse filename such that it becomes e.g. '\LL_eng_02_20170818_tr_train_1_mat.csv'
+        # Parse filename such that it becomes e.g. '_LL_eng_02_20170818_tr_train_1_mat.csv'
         fn = 'file'
         ll = file.split('lowlands')
         kg = file.split('kaggle')
@@ -217,9 +241,6 @@ def pipeline_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, cv
                 writer.writerows(data_int)
         except:
             print("Error writing "+file)
-
-    return res
-
 
 
 def concurrent_analyse_datasets_test(dataset:str, dataset_args:dict, loader_args:dict, pipeline, cv):
