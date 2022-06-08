@@ -61,10 +61,10 @@ def app():
 )
     st.altair_chart(line, use_container_width=True)
     
-    sha = np.unique(np.array(sha))
+    new_sha = np.unique(np.array(sha))
     
     #it creates a table with the commit ids and the corresponding sha keys
     col1, col2 = st.columns([2, 1])
-    col1.write(pd.DataFrame({'Commit-ID': range(1, len(sha)+1),
-         'SHA': np.unique(sha)
+    col1.write(pd.DataFrame({'Commit-ID': range(1, len(new_sha)+1),
+         'SHA': new_sha
      }))
