@@ -13,17 +13,17 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Your ML workflow goes here
+          # Installing prerequisites
           pip install -r requirements-pipeline.txt
-          pip install gitpython
           pip install --upgrade pip
           pip install --upgrade pip setuptools wheel
           pip install -e .
-          pip install pygit2
           
+          # Programs to run
           python mindaffectBCI/decoder/offline_regression_testing.py
           python csv2text.py
           
+          # Output
           echo "## OFFLINE REGRESSION TESTING" > report.md
           cat metrics.txt >> report.md
           
