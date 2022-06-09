@@ -1,5 +1,4 @@
 import datetime
-from pytz import timezone
 from git import Repo
 import csv
 import os
