@@ -1,7 +1,6 @@
 import datetime
 from pytz import timezone
-import git
-from pygit2 import Repository
+from git import Repo
 import csv
 import os
 import numpy as np
@@ -14,9 +13,9 @@ def get_metadata():
     Computes metadata (current time, sha, branch)
     '''
     current_date_and_time = datetime.datetime.now()
-    repo = git.Repo(search_parent_directories=True)
+    repo = Repo(search_parent_directories=True)
     sha = repo.head.object.hexsha
-    branch = Repository('.').head.shorthand # branch
+    branch = repo.active_branch.name
     return current_date_and_time, sha, branch
 
 def meta2csv():
